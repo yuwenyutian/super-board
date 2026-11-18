@@ -1786,7 +1786,7 @@
     const app = document.getElementById('app'); app.className = 'mapapp';
     document.querySelector('.bar').remove();
     app.innerHTML = `
-      <header class="mbar">
+      <header class="mbar"><a href="../../" style="white-space:nowrap;padding:4px 8px">地图导航</a>
         <button class="ibtn" id="m-outline" title="Views (O)" aria-label="Toggle the views list" aria-expanded="false">☰</button>
         <span class="mbrand"><i></i><span>${esc(D.title || 'Map')}</span></span>
         <nav class="crumbs" id="m-crumbs" aria-label="Breadcrumb"></nav>
