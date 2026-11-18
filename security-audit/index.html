@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Security audit map · super-board</title>
+<style>
+:root {color-scheme:light dark;--bg:#f6f8fa;--panel:#fff;--border:#d0d7de;--text:#1f2328;--sub:#59636e;--link:#0969da;--focus:#0969da}
+@media(prefers-color-scheme:dark){:root{--bg:#0d1117;--panel:#161b22;--border:#30363d;--text:#e6edf3;--sub:#9ea8b3;--link:#79c0ff;--focus:#79c0ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--link);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+header{background:var(--panel);border-bottom:1px solid var(--border)}
+.wrap{width:min(calc(100% - 36px),840px);margin:auto}
+header .wrap{display:flex;min-height:58px;align-items:center;justify-content:space-between;gap:16px}
+header a{text-decoration:none}
+nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--border);font-size:14px}
+main{padding:46px 0 56px}
+h1{font-size:clamp(30px,6vw,46px);line-height:1.12;margin:0 0 24px;letter-spacing:-.035em}
+.items{display:grid;gap:10px;list-style:none;margin:0;padding:0}
+.item{display:grid;gap:2px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px 20px;color:var(--text);text-decoration:none;font:inherit}
+.item:hover{border-color:var(--focus);cursor:pointer}
+.item small{color:var(--sub);font-size:14px}
+.item strong{color:var(--link);font-size:18px}
+[hidden]{display:none!important}
+label{display:block;margin-bottom:5px;font-weight:600}
+input{width:min(100%,320px);margin:0 0 18px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--panel);font:inherit}
+dialog{width:min(calc(100vw - 36px),550px);background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:12px;padding:22px 26px}
+dialog::backdrop{background:#0008}
+dialog h2{margin:0 0 8px}
+dialog form{display:flex;justify-content:flex-end}
+dialog button{font:inherit;padding:4px 14px;border-radius:8px;border:1px solid var(--border);cursor:pointer}
+</style>
+<header><div class="wrap"><a href="../">地图导航</a><a href="https://github.com/yuwenyutian/super-board">GitHub 仓库</a></div><nav class="wrap" aria-label="技能地图"><a href="../skill-map/">Skill map</a><a href="../impeccable/">Impeccable map</a><a href="../pstack/">pstack map</a><a href="../mattpocock/">Matt Pocock map</a><a href="../security-audit/">Security audit map</a></nav></header>
+<main class="wrap">
+<h1>Security audit map</h1>
+<label for="filter">搜索审查步骤</label><input id="filter" type="search">
+<ul class="items" id="steps"><li><button class="item" type="button" data-detail="记录代码版本、归属和审查范围。盘点涉及的入口、敏感数据和关键权限。"><strong>范围与资产</strong><small>明确审查的组件、数据类型和信任边界。</small></button></li><li><button class="item" type="button" data-detail="核对服务端权限检查、数据访问边界和错误处理。记录受影响模块、代码位置和理由。"><strong>防御性代码审查</strong><small>检查认证、授权和输入校验。</small></button></li><li><button class="item" type="button" data-detail="写明涉及的数据和使用者、已有控制与待确认条件。证据不足的发现进入待核实清单。"><strong>风险分级</strong><small>按影响、范围与证据分配处理优先级。</small></button></li><li><button class="item" type="button" data-detail="针对控制缺失补充测试，确认越权操作被拒绝、授权操作可用。运行现有回归测试并记录结果。"><strong>修复与回归验证</strong><small>检查修复和正常业务路径。</small></button></li><li><button class="item" type="button" data-detail="每条发现关联修复改动和验证证据。按计划复核已关闭的问题，并跟踪尚未完成的改动。"><strong>报告与跟踪</strong><small>记录负责人、修复版本和复核结果。</small></button></li></ul>
+<p id="empty" hidden>没有匹配的步骤。</p>
+<dialog id="detail" aria-labelledby="detail-title"><h2 id="detail-title"></h2><p id="detail-text"></p><form method="dialog"><button>关闭</button></form></dialog>
+</main>
+<script>
+const field = document.querySelector('#filter');
+const cards = [...document.querySelectorAll('#steps button')];
+const dialog = document.querySelector('#detail');
+const empty = document.querySelector('#empty');
+field.addEventListener('input', () => {
+  const query = field.value.trim().toLowerCase();
+  let matches = 0;
+  for (const card of cards) {
+    const visible = card.textContent.toLowerCase().includes(query);
+    card.parentElement.hidden = !visible;
+    if (visible) matches++;
+  }
+  empty.hidden = matches > 0;
+});
+for (const card of cards) {
+  card.addEventListener('click', () => {
+    document.querySelector('#detail-title').textContent = card.querySelector('strong').textContent;
+    document.querySelector('#detail-text').textContent = card.dataset.detail;
+    dialog.showModal();
+  });
+}
+</script>
+</html>

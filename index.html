@@ -1,8 +1,40 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url=./pstack/">
-<link rel="canonical" href="./pstack/">
-<title>pstack map</title>
-<p><a href="./pstack/">Open the pstack map</a></p>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>地图导航 · super-board</title>
+<style>
+:root {color-scheme:light dark;--bg:#f6f8fa;--panel:#fff;--border:#d0d7de;--text:#1f2328;--sub:#59636e;--link:#0969da;--focus:#0969da}
+@media(prefers-color-scheme:dark){:root{--bg:#0d1117;--panel:#161b22;--border:#30363d;--text:#e6edf3;--sub:#9ea8b3;--link:#79c0ff;--focus:#79c0ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--link);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+header{background:var(--panel);border-bottom:1px solid var(--border)}
+.wrap{width:min(calc(100% - 36px),840px);margin:auto}
+header .wrap{display:flex;min-height:58px;align-items:center;justify-content:space-between;gap:16px}
+header a{text-decoration:none}
+nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--border);font-size:14px}
+main{padding:46px 0 56px}
+h1{font-size:clamp(30px,6vw,46px);line-height:1.12;margin:0 0 24px;letter-spacing:-.035em}
+.items{display:grid;gap:10px;list-style:none;margin:0;padding:0}
+.item{display:grid;gap:2px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px 20px;color:var(--text);text-decoration:none;font:inherit}
+.item:hover{border-color:var(--focus);cursor:pointer}
+.item small{color:var(--sub);font-size:14px}
+.item strong{color:var(--link);font-size:18px}
+[hidden]{display:none!important}
+label{display:block;margin-bottom:5px;font-weight:600}
+input{width:min(100%,320px);margin:0 0 18px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--panel);font:inherit}
+dialog{width:min(calc(100vw - 36px),550px);background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:12px;padding:22px 26px}
+dialog::backdrop{background:#0008}
+dialog h2{margin:0 0 8px}
+dialog form{display:flex;justify-content:flex-end}
+dialog button{font:inherit;padding:4px 14px;border-radius:8px;border:1px solid var(--border);cursor:pointer}
+</style>
+<header><div class="wrap"><b>super-board</b><a href="https://github.com/yuwenyutian/super-board">GitHub 仓库</a></div></header>
+<main class="wrap"><h1>地图导航</h1><ul class="items"><li><a class="item" href="skill-map/"><strong>Skill map</strong><small>Super Board 的技能与工作流总图</small></a></li>
+<li><a class="item" href="impeccable/"><strong>Impeccable map</strong><small>设计、评审和界面改进工具</small></a></li>
+<li><a class="item" href="pstack/"><strong>pstack map</strong><small>按开发阶段查找 pstack 技能</small></a></li>
+<li><a class="item" href="mattpocock/"><strong>Matt Pocock map</strong><small>规划、开发和维护的工程技能</small></a></li>
+<li><a class="item" href="security-audit/"><strong>Security audit map</strong><small>防御性代码审查与修复验证</small></a></li></ul></main>
 </html>
